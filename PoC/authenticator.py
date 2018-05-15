@@ -1,8 +1,8 @@
 import base64
+import hashlib
+import time
 
 from Crypto.Cipher import AES
-import time
-import hashlib
 
 
 class Authenticator:
@@ -10,13 +10,14 @@ class Authenticator:
     def __init__(self, key):
         self.__aes = AES.new(key)
         self.__cache_hash(key)
+        self._token_time = 15
 
     def __cache_hash(self, key):
         self.__hash = hashlib.sha256(key).hexdigest()
 
     def generate_token(self):
         now_time = time.time()
-        now_time -= now_time % 30
+        now_time -= now_time % self._token_time
         return self._build_token(now_time)
 
     def _build_token(self, time_selected):

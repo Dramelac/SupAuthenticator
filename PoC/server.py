@@ -1,7 +1,8 @@
-from PoC.authenticator import Authenticator
 import base64
 import random
 import time
+
+from PoC.authenticator import Authenticator
 
 
 class ServerAuthenticator(Authenticator):
@@ -18,6 +19,6 @@ class ServerAuthenticator(Authenticator):
         return b"".join(bytes([random.randint(0, 255)]) for _ in range(16))
 
     def get_previous_token(self):
-        previous_time = time.time()-60
-        previous_time -= previous_time % 30
+        previous_time = time.time() - self._token_time
+        previous_time -= previous_time % self._token_time
         return self._build_token(previous_time)
