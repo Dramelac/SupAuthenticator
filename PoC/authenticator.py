@@ -15,19 +15,21 @@ class Authenticator:
         self.__hash = hashlib.sha256(key).hexdigest()
 
     def generate_token(self):
+        now_time = time.time()
+        now_time -= now_time % 30
+        return self._build_token(now_time)
+
+    def _build_token(self, time_selected):
         if self.__aes is None:
             raise Exception("Authenticator is not initialize")
 
-        nowtime = time.time()
-        nowtime -= nowtime % 30
-        chall = str(nowtime) + self.__hash
+        challenge = str(time_selected) + self.__hash
+        hash_tmp = hashlib.sha256(challenge.encode("utf-8")).hexdigest()
 
-        hash = hashlib.sha256(chall.encode("utf-8")).hexdigest()
-
-        ciphered = self.__aes.encrypt(hash)
+        ciphered = self.__aes.encrypt(hash_tmp)
         base = base64.b64encode(ciphered)
 
-        hash = hashlib.md5(base).hexdigest()
+        hash_tmp = hashlib.md5(base).hexdigest()
 
-        result = ''.join([hash[i] for i in range(0, len(hash), 4)])
+        result = ''.join([hash_tmp[i] for i in range(0, len(hash_tmp), 4)])
         return result.upper()
