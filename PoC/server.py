@@ -14,4 +14,4 @@ class ServerAuthenticator(Authenticator):
 
     @staticmethod
     def key_generator():
-        return "".join(random.randint(0, 255) for _ in range(16))
+        return b"".join(bytes([random.randint(0, 255)]) for _ in range(16))

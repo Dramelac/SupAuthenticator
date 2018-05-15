@@ -10,4 +10,5 @@ while True:
         print("Server token:", server.generate_token())
         print("Client token:", client.generate_token())
     except KeyboardInterrupt:
-        print("Exiting")
+        print("\nExiting")
+        break
