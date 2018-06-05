@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MegaSupload</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{% static "img/cloud_ico.png" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap4/bootstrap.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/loader.css' %}"/>
+
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="{% url "home" %}">
+                <img src="{% static 'img/logo_megasupload.png' %}" width="30" height="30" alt="">
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="{% url "home" %}"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-right">
+                    {% if not user.is_authenticated %}
+                        <li class="nav-item"><a href="{% url "login" %}">Login</a></li>
+                        <li class="nav-item"><a href="{% url "register" %}">Register</a></li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a href="#" onclick="delete localStorage.priv_key;delete localStorage.pub_key;window.location='{% url "logout" %}'"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+
+        {% block body %}
+        {% endblock %}
+
+    </div>
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap4/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/fontawesome-all.js' %}"></script>
+<script src="{% static 'js/forge.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+{% block script %}
+{% endblock %}
+</body>
+</html>

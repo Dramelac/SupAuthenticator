@@ -1,0 +1,299 @@
+[v-cloak] {
+    display: none;
+}
+.navbar {
+    background: #d401ff;
+    margin-bottom: 20px;
+}
+.navbar a:not(.navbar-brand) {
+    display: inline-block;
+    margin-left: 20px;
+    padding: 0 10px;
+    color: white;
+    font-weight: bold;
+    line-height: 40px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all .2s ease-in-out;
+}
+.navbar a:not(.navbar-brand):hover {
+    color: #d401ff;
+    background: white;
+}
+@media (max-width: 767px) {
+    .navbar a:not(.navbar-brand) {
+        margin-left: 0;
+        margin-top: 7px;
+        width: 100%;
+    }
+}
+.navbar-text {
+    font-weight: bold;
+    color: white;
+}
+#filesContainer {
+    padding: 10px;
+    border: 2px solid #e3e3e3;
+    height: calc(100vh - 200px);
+    min-height: 300px;
+    overflow: auto;
+}
+.file, .directory {
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: all .1s ease-out;
+    border-bottom: 1px solid #d7d7d7;
+}
+.file:hover, .directory:hover {
+    color: white;
+    background: #d401ff;
+}
+.fileIcon{
+    width: 25px !important;
+    margin-right: 20px;
+}
+.btnSetting {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: ghostwhite;
+}
+#path {
+    padding: 8px 20px;
+    background: #e3e3e3;
+    margin: 10px 0 10px 0;
+    border-radius: 10px;
+}
+#fileDetailsModal, #fileDetailsModal .modal-dialog {
+    min-width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0!important;
+}
+#fileDetailsModal .modal-content {
+    height: 100%;
+}
+#fileDetailsModal .modal-body {
+    height: calc(100% - 135px);
+}
+#fileDetails {
+    height: 80px;
+    text-align: center;
+    line-height: 40px;
+}
+#fileContent {
+    height: calc(100% - 90px);
+    margin-top: 10px;
+}
+@media (min-width: 768px) {
+    #fileContent, #fileDetails {
+        height: 100%;
+
+    }
+    #fileContent {
+        border-right: 1px solid #c2bdbd;
+        margin-top: 0;
+    }
+}
+#fileDetails button {
+    width: 80%;
+}
+#fileContent > * {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+#dropbox {
+    width: 94%;
+    height: 300px;
+    margin: 3%;
+    padding-top: 100px;
+    outline: 2px dashed #567ba5;
+    outline-offset: 0px;
+    background: white;
+    text-align: center;
+    color: #567ba5;
+    transition: all .2s ease-in-out;
+}
+#dropbox.drapActive {
+    outline-offset: -15px;
+    background: #f5f5f5;
+}
+#uploadProgress {
+    display: none;
+    color: #567ba5;
+    font-size: .6em;
+    line-height: 1.5em;
+    text-indent: .5em;
+    width: 15em;
+    height: 1.8em;
+    border: 1px solid #567ba5;
+    background: #fff;
+    border-radius: 8px;
+    width: 94%;
+    margin: 3%;
+    height: 20px;
+}
+progress::-moz-progress-bar {
+    background: #567ba5;
+    border-radius: 5px;
+}
+progress::-webkit-progress-value {
+    background: #567ba5;
+    border-radius: 5px;
+}
+.btn_connect {
+    display: inline-block;
+    line-height: 50px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: white!important;
+    margin-bottom: 30px;
+}
+.btn_connect img {
+    height: 25px;
+    padding-right: 18px;
+}
+
+.btn_fb {
+    background: #3b5998;
+}
+.btn_google {
+    background: #d54a33;
+}
+.dropdown {
+    float: right;
+}
+.dropdown .btn {
+    padding: 0px 8px;
+    font-size: 20px;
+    margin-top: -5px;
+    background: white;
+    color: #0060ff;
+}
+.dropdown-item:hover {
+    color: white;
+    background: #0060ff;
+}.dropdown-item svg {
+    margin-right: 15px;
+}
+#searchUserInput {
+    line-height: initial;
+}
+.searchUserDiv {
+    color: white;
+    background: #617298;
+    margin-top: 3px;
+    cursor: pointer;
+}
+.searchUserDiv:hover {
+    background: #3b5998;
+}
+
+.btn-toggle {
+    margin: 0 5rem !important;
+    padding: 0;
+    position: relative;
+    border: none;
+    height: 1.5rem;
+    width: 3rem;
+    border-radius: 1.5rem;
+    color: #6b7381;
+    background: #bdc1c8;
+}
+
+.btn-toggle:focus,
+.btn-toggle.focus,
+.btn-toggle:focus.active,
+.btn-toggle.focus.active {
+    outline: none;
+}
+
+.btn-toggle:before,
+.btn-toggle:after {
+    line-height: 1.5rem;
+    width: 4rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: 0;
+    transition: opacity .25s;
+}
+
+.btn-toggle:before {
+    content: 'LOCAL';
+    left: -4rem;
+}
+
+.btn-toggle:after {
+    content: 'SHARED';
+    right: -4rem;
+    opacity: .5;
+    padding-left: 10px;
+}
+
+.btn-toggle > .handle {
+    position: absolute;
+    top: 0.1875rem;
+    left: 0.1875rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 1.125rem;
+    background: #fff;
+    transition: left .25s;
+}
+
+.btn-toggle.active {
+    transition: background-color 0.25s;
+}
+
+.btn-toggle.active > .handle {
+    left: 1.6875rem;
+    transition: left .25s;
+}
+
+.btn-toggle.active:before {
+    opacity: .5;
+}
+
+.btn-toggle.active:after {
+    opacity: 1;
+}
+
+.btn-toggle:before,
+.btn-toggle:after {
+    color: #6b7381;
+}
+
+.btn-toggle.active {
+    background-color: #007bff;
+}
+
+#buttonsContainer {
+    line-height: 42px;
+}
+#buttonsContainer button {
+    margin-right: 20px;
+}
+
+#moveModal ul {
+    list-style-type: none!important;
+}
+.dirItem {
+    background: #908f8e;
+    color: white;
+    padding: 7px 20px;
+    margin-bottom: 5px;
+    max-width: 400px;
+}
+.dirItem:hover {
+    background: #5a6268;
+    cursor: pointer;
+}
+
+body.shareIsActive .notForShare {
+    display: none;
+}
