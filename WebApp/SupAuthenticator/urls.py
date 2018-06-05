@@ -9,6 +9,7 @@ urlpatterns = [
     path('register/', app_view.register, name="register"),
     path('register/create', app_view.registeruser, name="registeruser"),
     path('logout/', app_view.logout, name="logout"),
+    path('remove/', app_view.remove_mfa, name="remove"),
     path('generator/', app_view.generator, name="generator"),
     path('generator/validate', app_view.validate_mfa, name="validate"),
 ]

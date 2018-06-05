@@ -7,17 +7,21 @@
     <form class="col-md-6 offset-md-3" method="post" id="login-form">
         <div id="error-msg"></div>
         {% csrf_token %}
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" class="form-control" name="pseudo"
-                   placeholder="Login" required autofocus=""/>
+        <div id="lgn-input">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" name="pseudo"
+                       placeholder="Login" required autofocus=""/>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Password" required/>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Password" required/>
+        <div id="tkn-input" class="form-group">
         </div>
         <div class="col-xs-12 text-center">
-            <button class="btn btn-lg btn-primary" type="submit">Authenticate</button>
+            <button id="authBtn" class="btn btn-lg btn-primary" type="submit">Authenticate</button>
         </div>
     </form>
 {% endblock %}
@@ -32,18 +36,27 @@
                 dataType: "json",
                 data: JSON.stringify({
                     "username": $(this).find("input[name='pseudo']").val(),
-                    "password": $(this).find("input[name='password']").val()
+                    "password": $(this).find("input[name='password']").val(),
+                    "token": $(this).find("input[name='token']").val()
                 }),
                 success: function (res) {
-                    localStorage.priv_key = res.priv_key;
-                    localStorage.pub_key = res.pub_key;
                     var regex = window.location.search.substr(1).match(/next=(.+)\&?/);
                     window.location = regex ? decodeURIComponent(regex[1]) || "/" : "/";
                 },
                 error: function (err) {
                     console.log(err.responseJSON);
-                    document.getElementById("error-msg").innerHTML = "<div class=\"alert alert-danger\" role=\"alert\">" + err.responseJSON.message + "</div>";
-                    $("#error-msg").show();
+                    if (err.status === 406) {
+                        console.log("Token needed");
+                        $("#tkn-input").show();
+                        $("#lgn-input").hide();
+                        document.getElementById("tkn-input").innerHTML = "<label>Token</label>\n" +
+                            "            <input type=\"text\" class=\"form-control\" name=\"token\"/>";
+                    }
+                    else {
+                        document.getElementById("error-msg").innerHTML = "<div class=\"alert alert-danger\" role=\"alert\">" + err.responseJSON.message + "</div>";
+                        $("#error-msg").show();
+                    }
+
                 }
             });
         })

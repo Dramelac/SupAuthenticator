@@ -8,7 +8,7 @@ from PoC.authenticator import Authenticator
 class ServerAuthenticator(Authenticator):
 
     def __init__(self, key=None):
-        self.__key = key if key is not None else self.key_generator()
+        self.__key = base64.standard_b64decode(key) if key is not None else self.key_generator()
         super().__init__(self.__key)
 
     def export_key(self):

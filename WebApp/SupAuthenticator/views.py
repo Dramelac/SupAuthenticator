@@ -9,6 +9,8 @@ from SupAuthenticator.models import *
 from SupAuthenticator.tools.decorators import json_parser
 from SupAuthenticator.tools.server import ServerAuthenticator
 from SupAuthenticator.tools.client import ClientAuthenticator
+
+
 def index(request):    
     return render(request, 'index.html')
 
@@ -56,9 +58,22 @@ def registeruser(request):
 def connect(request):
     username = request.json.get('username', '').strip()
     password = request.json.get('password', '')
+    token = request.json.get('token', '')
     auth = authenticate(username=username, password=password)
     if auth is not None:
         user = User.objects.get(id=auth.id)
+        if user.mfa_key != '':
+            if token != '':
+                authenticator = ServerAuthenticator(user.mfa_key)
+                if token == authenticator.generate_token() or token == authenticator.get_previous_token():
+                    auth_login(request, auth)
+                    return JsonResponse({"message": "MFA authenticator successful.", }, status=200)
+                else:
+                    return JsonResponse({"message": "Bad Token.", }, status=403)
+
+            return JsonResponse({
+                "message": "Token needed"
+            }, status=406)
         auth_login(request, auth)
 
         return JsonResponse({
@@ -88,10 +103,18 @@ def validate_mfa(request):
         user.mfa_key = mfa
         user.save()
         return JsonResponse({
-            "message":"MFA authenticator successful."
+            "message": "MFA authenticator successful."
         }, status=200)
     else:
         return JsonResponse({"message": "Bad credentials."}, status=401)
+
+
+@login_required
+def remove_mfa(request):
+    user = User.objects.get(id=request.user.id)
+    user.mfa_key = ''
+    user.save()
+    return HttpResponseRedirect("/")
 
 
 @login_required
