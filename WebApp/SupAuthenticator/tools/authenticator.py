@@ -21,6 +21,7 @@ class Authenticator:
         return self._build_token(now_time)
 
     def _build_token(self, time_selected):
+        time_selected = int(time_selected)
         if self.__aes is None:
             raise Exception("Authenticator is not initialize")
 
