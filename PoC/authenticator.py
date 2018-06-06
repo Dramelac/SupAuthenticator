@@ -29,9 +29,7 @@ class Authenticator:
         hash_tmp = hashlib.sha256(challenge.encode("utf-8")).hexdigest()
 
         ciphered = self.__aes.encrypt(hash_tmp)
-        base = base64.b64encode(ciphered)
-
-        hash_tmp = hashlib.md5(base).hexdigest()
+        hash_tmp = hashlib.md5(ciphered).hexdigest()
 
         result = ''.join([hash_tmp[i] for i in range(0, len(hash_tmp), 4)])
         return result.upper()
