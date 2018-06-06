@@ -2,7 +2,7 @@
     display: none;
 }
 .navbar {
-    background: #d401ff;
+    background: #2c65ff;
     margin-bottom: 20px;
 }
 .navbar a:not(.navbar-brand) {
@@ -17,7 +17,7 @@
     transition: all .2s ease-in-out;
 }
 .navbar a:not(.navbar-brand):hover {
-    color: #d401ff;
+    color: #2c65ff;
     background: white;
 }
 @media (max-width: 767px) {
@@ -46,7 +46,7 @@
 }
 .file:hover, .directory:hover {
     color: white;
-    background: #d401ff;
+    background: #2c65ff;
 }
 .fileIcon{
     width: 25px !important;
